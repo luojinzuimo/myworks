@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>timerDemo</title>
+
+    <script>
+        var second;//时 分 秒
+        second = 0;//初始化
+        mode = -1;
+        var clock;//计时器
+        function resetTimer()//重置
+        {
+            clearInterval(clock);
+            second = 0;
+            document.getElementById('timeValue').value = 'Time passed:' + (second / 100).toFixed(2) + '秒';
+        }
+
+        function startTimer()//开始
+        {
+            clock = setInterval(timer, 10);
+            document.getElementById('b1').innerHTML = '暂停';
+        }
+
+        function stopTimer() {
+            //停止计时
+            clearInterval(clock);
+            document.getElementById('b1').innerHTML = '开始';
+            document.getElementById('timeValue').value = 'Time passed:' + (second / 100).toFixed(2) + '秒';
+        }
+        //计时函数
+        function timer() {
+            second++;
+            document.getElementById('timeValue').value = 'Time passed:' + (second / 100).toFixed(2) + '秒';
+        }
+
+        function chMod() {
+            //主调度函数
+            mode = mode + 1;
+            if (mode >= 2) {
+                mode = 0;
+            }
+            if (mode == 0) {
+                startTimer();
+            }
+            else if (mode == 1) {
+                stopTimer();
+            }
+        }
+    </script>
+    <style type="text/css">
+        body,
+        html {
+            background: rgb(255, 255, 255);
+            /*position: relative;*/
+        }
+
+        #first {
+            height: 20%;
+            width: 50%;
+            position: absolute;
+            margin-left: 350px;
+            margin-top: 150px;
+            background: #e45559;
+        }
+
+        #two {
+            height: 200px;
+            width: 100%;
+            position: absolute;
+            margin-top: 130px;
+            margin-left: 130px;
+            ;
+        }
+
+        span {
+            font-size: 30px;
+        }
+
+        button {
+            font-size: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <div id="first">
+        <div id="two"></div>
+        <div style="text-align: center">
+            <input type="text" id="timeValue" value="Time passed:0.00秒" readonly><br>
+            <button type="button" onclick="chMod()" id="b1">开始</button>
+        </div>
+</body>
+
+</html>

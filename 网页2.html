@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<script type="text/javascript">
+var intervalId;
+var i = 0;
+var count=0;
+function startTime(){
+var hour = document.getElementById("hour");
+var minute = document.getElementById("minute");
+var second = document.getElementById("second");
+var ms = document.getElementById("ms");
+var buttonEle = document.getElementById("start");
+
+
+if(i%2==0){
+buttonEle.innerHTML="暂停计时";
+intervalId = setInterval(function(){
+count += 1;
+var thehour=parseInt(count/360000);
+var theminute=parseInt(count/6000%60);
+var thesecond=parseInt(count/100%60);
+var thems = parseInt(count%100);
+
+if(thehour>=10){
+hour.innerHTML=thehour+" ";
+}
+else{
+hour.innerHTML="0"+thehour+" ";
+}
+
+if(theminute>=10){
+minute.innerHTML=theminute+" ";
+}
+else{
+minute.innerHTML="0"+theminute+" ";
+}
+
+if(thesecond>=10){
+second.innerHTML=thesecond+" ";
+}
+else{
+second.innerHTML="0"+thesecond+"  ";
+}
+if(thems>=10){
+ms.innerHTML=thems+"&nbsp;";
+}
+else{
+ms.innerHTML="0"+thems+"&nbsp;";
+}
+},10)
+}
+else{
+buttonEle.innerHTML="开始";
+clearInterval(intervalId);
+}
+i++;
+}
+</script>
+<style type="text/css">
+body,html{
+background: rgb(255, 255, 255);
+/*position: relative;*/
+}
+#firstDiv{
+height: 50%;
+width:50% ;
+position:absolute;
+margin-left: 350px;
+margin-top:150px;
+background: #e45559;
+}
+#twoDiv{
+height: 200px;
+width:100%;
+position: absolute;
+margin-top: 130px;
+margin-left: 130px;;
+}
+span{
+font-size: 30px;
+}
+button{
+font-size: 20px;
+}
+</style>
+</head>
+<body>
+<div id="firstDiv">
+<div id="twoDiv">
+<span><span id="hour">00&nbsp;</span>时</span>
+<span><span id="minute">00&nbsp;</span>分</span>
+<span><span id="second">00&nbsp;</span>秒</span>
+<span><span id="ms">00&nbsp;</span>毫秒</span>
+
+<button id="start" οnclick="startTime()">开始计时</button>
+</div>
+</div>
+</body>
+</html>
